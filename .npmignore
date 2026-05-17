@@ -1,0 +1,16 @@
+*
+!bin/
+!bin/**
+!src/
+!src/**
+!README.md
+!LICENSE
+!package.json
+
+node_modules/
+.DS_Store
+*.log
+.env
+.env.*
+scripts/
+.npmignore

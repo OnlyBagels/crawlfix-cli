@@ -1,0 +1,39 @@
+{
+  "name": "crawlfix",
+  "version": "0.1.1",
+  "description": "External SEO and AI-search auditor. Scan sites, get prioritized fix prompts for your coding agent.",
+  "type": "module",
+  "bin": {
+    "crawlfix": "./bin/crawlfix.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "seo",
+    "aeo",
+    "ai-seo",
+    "site-audit",
+    "lighthouse",
+    "crawler",
+    "spa-seo",
+    "react-seo",
+    "nextjs-seo"
+  ],
+  "author": "Faction Community, LLC",
+  "homepage": "https://crawlfix.ai",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OnlyBagels/crawlfix-cli.git"
+  },
+  "bugs": {
+    "url": "mailto:Michael@faction.chat"
+  },
+  "license": "MIT",
+  "files": [
+    "bin/",
+    "src/",
+    "README.md",
+    "LICENSE"
+  ]
+}
