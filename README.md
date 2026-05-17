@@ -36,6 +36,13 @@ crawlfix fix <issueId>         # get an AI fix prompt to paste into your agent
 | `crawlfix export <auditId> --format pdf` | Download an audit report as JSON, HTML, or PDF. (paid)               |
 | `crawlfix compare <auditId> <url>`       | Side-by-side audit against a competitor URL. (paid)                  |
 | `crawlfix monitor <subcommand>`          | Schedule recurring scans and alerts. (paid)                          |
+| `crawlfix policy generate ...`           | Generate a privacy / cookie / terms / AUP policy document. (paid)    |
+| `crawlfix policy list [--domain X]`      | List policy documents you've already generated.                      |
+| `crawlfix policy install ...`            | Print a policy-install prompt for your coding agent.                 |
+| `crawlfix banner snippet ...`            | Print the consent-banner <script> tag for your site.                 |
+| `crawlfix banner install ...`            | Print a consent-banner install prompt for your coding agent.         |
+| `crawlfix analytics snippet --site-id X` | Print the analytics <script> tag for your site. (paid)               |
+| `crawlfix analytics install --site-id X` | Print an analytics install prompt for your coding agent.             |
 | `crawlfix help [command]`                | Show this list, or detailed help for one command.                    |
 | `crawlfix --version`                     | Print the installed CLI version.                                     |
 
@@ -86,6 +93,39 @@ crawlfix monitor pause example.com
 crawlfix monitor resume example.com
 crawlfix monitor remove example.com
 ```
+
+## Embeddable widgets
+
+Crawlfix ships three drop-in widgets your AI agent can install for you without
+ever opening the dashboard: a consent banner, a privacy-friendly analytics
+beacon, and on-demand policy documents (privacy / cookie / terms / AUP).
+
+Each widget has two CLI surfaces:
+
+  - **`snippet`** prints the `<script>` tag (and marketplace JS URL) you drop
+    into your site's HTML.
+  - **`install`** prints a framework-specific "install this widget" prompt you
+    can paste into your coding agent (Claude Code, Cursor, etc.). Add `--copy`
+    to put it on your clipboard or `--save` to write a `.md` file.
+
+```bash
+# Consent banner
+crawlfix banner snippet --site-id site_abc --privacy-url https://x.com/privacy
+crawlfix banner install --framework next-app --copy
+
+# Analytics (paid)
+crawlfix analytics snippet --site-id site_abc
+crawlfix analytics install --site-id site_abc --framework sveltekit --save
+
+# Policies
+crawlfix policy generate --domain example.com --type privacy \
+  --business-name "Acme" --jurisdictions gdpr-eu,ccpa --save
+crawlfix policy list --domain example.com
+crawlfix policy install --type privacy --framework next-app --copy
+```
+
+Supported `--framework` values: `next-app`, `nuxt`, `sveltekit`, `astro`,
+`plain-html`.
 
 ## Environment variables
 

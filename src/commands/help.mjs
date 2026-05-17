@@ -12,6 +12,9 @@ const SUMMARY = [
   ['export',  'Download an audit report as JSON, HTML, or PDF. (paid)'],
   ['compare', 'Side-by-side audit against a competitor. (paid)'],
   ['monitor', 'Schedule recurring scans and alerts. (paid)'],
+  ['policy',    'Generate, list, and install policy documents. (paid generate)'],
+  ['banner',    'Print the consent-banner snippet or install prompt.'],
+  ['analytics', 'Print the analytics snippet (paid) or install prompt.'],
   ['help',    'Show this help, or detailed help for one command.'],
 ]
 

@@ -9,6 +9,9 @@ import * as verify from './verify.mjs'
 import * as exportCmd from './export.mjs'
 import * as compare from './compare.mjs'
 import * as monitor from './monitor.mjs'
+import * as policy from './policy.mjs'
+import * as banner from './banner.mjs'
+import * as analytics from './analytics.mjs'
 import * as help from './help.mjs'
 
 export const commands = {
@@ -23,5 +26,8 @@ export const commands = {
   export: exportCmd,
   compare,
   monitor,
+  policy,
+  banner,
+  analytics,
   help,
 }
