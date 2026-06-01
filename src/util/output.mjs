@@ -56,6 +56,22 @@ export function categoryColor(category) {
   return CATEGORY_COLORS[key] || (v => String(v))
 }
 
+// Normalize a scan/result object to the QUALITY score (higher = better) that
+// scoreBandLabel and scoreColor expect. The API carries two numbers: a RISK
+// score (`score`, higher = worse) and a QUALITY score (`overall_score`, higher
+// = better, what the dashboard ring shows). Prefer overall_score; fall back to
+// inverting the legacy risk score so older scans still read correctly.
+export function qualityScore(obj) {
+  if (!obj) return null
+  if (obj.overall_score != null && Number.isFinite(Number(obj.overall_score))) {
+    return Number(obj.overall_score)
+  }
+  if (obj.score != null && Number.isFinite(Number(obj.score))) {
+    return 100 - Number(obj.score)
+  }
+  return null
+}
+
 export function scoreBandLabel(score) {
   const n = Number(score)
   if (!Number.isFinite(n)) return 'Unknown'

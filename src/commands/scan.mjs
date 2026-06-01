@@ -1,6 +1,6 @@
 import { callRest } from '../api.mjs'
 import { loadCredentials, resolveServer, resolveToken } from '../config.mjs'
-import { color, spinner, scoreBandLabel, scoreColor, categoryColor } from '../util/output.mjs'
+import { color, spinner, scoreBandLabel, scoreColor, categoryColor, qualityScore } from '../util/output.mjs'
 import { sleep } from '../util/poll.mjs'
 
 export const helpText = `
@@ -103,7 +103,10 @@ export async function run(argv) {
 
 function printSummary(scanId, snapshot) {
   const result = snapshot.result || snapshot
-  const score = result.score
+  // The headline must be the QUALITY score (higher = better), which is what
+  // scoreBandLabel/scoreColor expect. result.score is the inverse RISK score,
+  // so showing it raw rendered a healthy site as "Danger Zone".
+  const score = qualityScore(result)
   const issues = Array.isArray(result.issues) ? result.issues : []
   const buckets = bucket(issues, 'severity')
   const totals = {

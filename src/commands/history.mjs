@@ -1,6 +1,6 @@
 import { callRest, callMcp } from '../api.mjs'
 import { loadCredentials, resolveServer, resolveToken } from '../config.mjs'
-import { color, table, severityColor } from '../util/output.mjs'
+import { color, table, severityColor, qualityScore } from '../util/output.mjs'
 
 export const helpText = `
 crawlfix history [options]
@@ -37,11 +37,12 @@ export async function run(argv) {
     const id = s.scan_id || s.id || s.audit_id || ''
     const url = s.url || s.domain || ''
     const completed = s.completed_at || s.completedAt || s.created_at || ''
+    const q = qualityScore(s)
     return {
       id,
       domain: prettyDomain(url),
       date: formatDate(completed),
-      score: s.score != null ? String(s.score) : '',
+      score: q != null ? String(q) : '',
       issues: s.issue_count != null ? String(s.issue_count) : (Array.isArray(s.issues) ? String(s.issues.length) : ''),
     }
   })

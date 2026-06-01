@@ -1,6 +1,6 @@
 import { callMcp } from '../api.mjs'
 import { loadCredentials, resolveServer, resolveToken } from '../config.mjs'
-import { color, scoreColor, scoreBandLabel } from '../util/output.mjs'
+import { color, scoreColor, scoreBandLabel, qualityScore } from '../util/output.mjs'
 import { withPaywall } from '../util/paywall.mjs'
 
 export const helpText = `
@@ -54,8 +54,8 @@ function printSideBySide(result) {
   }
   const you = result.you || result.self || result.audit || {}
   const them = result.competitor || result.them || {}
-  const yourScore = you.score
-  const theirScore = them.score
+  const yourScore = qualityScore(you)
+  const theirScore = qualityScore(them)
   process.stdout.write('\n')
   process.stdout.write(color.bold('Side-by-side:') + '\n')
   process.stdout.write(`  You:        ${formatScore(yourScore)} (${you.domain || you.url || ''})\n`)
